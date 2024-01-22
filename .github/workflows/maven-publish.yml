@@ -36,7 +36,7 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
         cache: maven
-        - name: Analyze with SonarCloud
+    - name: Analyze with SonarCloud
       run: ./mvnw -B verify sonar:sonar
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
