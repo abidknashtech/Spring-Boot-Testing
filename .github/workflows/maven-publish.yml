@@ -27,9 +27,7 @@ jobs:
         env: 
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
   build:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v3
     - name: Set up JDK 17
@@ -38,5 +36,10 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
         cache: maven
+        - name: Analyze with SonarCloud
+      run: ./mvnw -B verify sonar:sonar
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
     - name: Build with Maven
       run: mvn -B package --file pom.xml
